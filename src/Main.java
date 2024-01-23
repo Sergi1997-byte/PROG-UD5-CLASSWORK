@@ -54,7 +54,6 @@ public class Main {
             }
             case 3 -> {
                 mostrarOrdenPorStock(mostrarStock(videojuegos));
-                break;
             }
             case 4 -> {
                 mostrarOrdenPorPrecio(videojuegos);
@@ -187,8 +186,8 @@ public class Main {
                 }
             }
         }
-        for (String[] videojuego : videojuegos) {
-            System.out.printf("| \t  %2s | %19s |  %5s |", videojuego[0], videojuego[1], videojuego[2]);
+        for (String[] juego : videojuegos) {
+            System.out.printf("| \t  %2s | %19s |  %5s |", juego[0], juego[1], juego[2]);
             System.out.println();
         }
         System.out.println("+--------+---------------------+--------+");
@@ -199,7 +198,7 @@ public class Main {
     Registrar las ventas
      */
     public static void registrarVentas(Scanner teclado, String[][] videojuegos) {
-        boolean[] codigosValidos = new boolean[CODIGO_MAX_VIDEOJUEGO]; // Array para marcar códigos válidos
+        boolean[] codigosValidos = new boolean[CODIGO_MAX_VIDEOJUEGO];
 
         int codigoVideojuego;
         boolean codigoValido = false;
@@ -210,7 +209,7 @@ public class Main {
             for (String[] codigo : videojuegos) {
                 if (codigoVideojuego == Integer.parseInt(codigo[0])) {
                     codigoValido = true;
-                    codigosValidos[codigoVideojuego - 1] = true; // Marca el código como válido
+                    codigosValidos[codigoVideojuego - 1] = true;
                     break;
                 }
             }
@@ -237,15 +236,16 @@ public class Main {
             ventas[codigoVenta - 1][2] = cantidad;
             realizarMasCompras();
             cabezeraResumenVenta();
+
             for (int i = 0; i < codigosValidos.length; i++) {
                 if (codigosValidos[i]) {
                     System.out.printf("| \t  %2s | %19s |\t   %2s |", videojuegos[i][0], videojuegos[i][1], videojuegos[i][3]);
-                    System.out.println();
                 }
             }
             System.out.println("+--------+---------------------+----------+");
         }
     }
+
     public static void realizarMasCompras() {
         System.out.print("¿Desea comprar algún videojuego más? (S/N): ");
         String siONo = teclado.next();
@@ -279,7 +279,6 @@ public class Main {
 
     }
 
-
     /*
     Salida por pantalla
      */
@@ -304,13 +303,13 @@ public class Main {
         do {
             System.out.print("Introduce opción: ");
             while (!teclado.hasNextInt()) {
-                System.out.println("Pero tu eres tonto? aprende a poner números");
+                System.out.println("Introduce un número");
                 teclado.next();
                 System.out.print("Introduce opción: ");
             }
             int num = teclado.nextInt();
             if (num < 0 || num > 7) {
-                System.out.println("Estas a NADA, para que te den una subvención por retraso, venga que tu puedes");
+                System.out.println("Venga que estas cerca");
             } else {
                 return num;
             }

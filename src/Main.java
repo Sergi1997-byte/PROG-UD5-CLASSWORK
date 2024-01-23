@@ -214,7 +214,7 @@ public class Main {
 
             for (int i = 0; i < codigosValidos.length; i++) {
                 if (codigosValidos[i]) {
-                    System.out.printf("| \t  %2s | %19s |\t   %2s |", videojuegos[i][0], videojuegos[i][1], videojuegos[i][3]);
+                    System.out.printf("| \t  %2s | %19s |\t   %2s |\n", videojuegos[i][0], videojuegos[i][1], videojuegos[i][3]);
                 }
             }
             System.out.println("+--------+---------------------+----------+");

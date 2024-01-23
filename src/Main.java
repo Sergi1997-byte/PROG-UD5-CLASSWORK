@@ -198,6 +198,7 @@ public class Main {
     Registrar las ventas
      */
     public static void registrarVentas(Scanner teclado, String[][] videojuegos) {
+        boolean[] codigosValido = new boolean[CODIGO_MAX_VIDEOJUEGO];
         int codigoVideojuego;
         boolean codigoValido = false;
         do {
@@ -230,16 +231,14 @@ public class Main {
             ventas[codigoVenta - 1][2] = cantidad;
             realizarMasCompras();
             cabezeraResumenVenta();
-            int totalTabla = Integer.parseInt(videojuegos[codigoVideojuego -1][0]);
 
-            if (codigoVideojuego > 0) {
-                ++totalTabla;
+            for (int i = 0; i < codigosValido.length; i++) {
+                if (codigosValido[i]){
+                    System.out.printf("| \t  %2s | %19s |\t   %2s |", videojuegos[i][0], videojuegos[i][1], videojuegos[i][3]);
+                    System.out.println();
+                }
             }
 
-            if (totalTabla == totalTabla) {
-                System.out.printf("| \t  %2s | %19s |\t   %2s |", Arrays.toString(videojuegos[0]), Arrays.toString(videojuegos[1]), Arrays.toString(videojuegos[3]));
-                System.out.println();
-            }
             System.out.println("+--------+---------------------+----------+");
         }
 

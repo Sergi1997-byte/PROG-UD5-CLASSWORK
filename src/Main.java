@@ -16,7 +16,6 @@ public class Main {
     public static final Double CODIGODIEZ = 49.99;
     public static String[][] videojuegos = new String[TOTAL_VIDEOJUEGOS][4];
     public static int[][] ventas = new int[CODIGO_MAX_VIDEOJUEGO][3];
-    //public static final int[] stock = new int[TOTAL_VIDEOJUEGOS+1];
 
     public static void main(String[] args) {
         teclado = new Scanner(System.in);
@@ -69,9 +68,6 @@ public class Main {
             }
         }
     }
-    /*
-    catalogo de videojuegos
-     */
 
     public static void catalogoVideoJuegos() {
         String[][] datosVideojuegos = {
@@ -86,17 +82,11 @@ public class Main {
                 {"9", "The Sims", String.valueOf(CODIGONUEVE), String.valueOf(stockRango())},
                 {"10", "Grand Theft Auto V", String.valueOf(CODIGODIEZ), String.valueOf(stockRango())}
         };
-
         for (int i = 0; i < TOTAL_VIDEOJUEGOS; i++) {
             videojuegos[i] = Arrays.copyOf(datosVideojuegos[i], datosVideojuegos[i].length);
 
         }
-
     }
-
-    /*
-    Catalogo nivel - 1
-     */
     public static void mostrarCatalogo() {
         System.out.println("""
                 Catálogo de videojuegos:
@@ -108,12 +98,7 @@ public class Main {
             System.out.println();
         }
         System.out.println("+--------+---------------------+-------+");
-
     }
-
-    /*
-    Stock disponible  nivel - 2
-     */
     public static String[][] mostrarStock(String[][] videojuegos) {
         System.out.println("""
                 Stock de videojuegos:
@@ -137,9 +122,6 @@ public class Main {
         return (int) ((Math.random() * max - min + 1) + min);
     }
 
-    /*
-    Stock Ordenado de > <
-     */
     public static String[][] mostrarOrdenPorStock(String[][] videojuegos) {
         System.out.println("""
                 Stock de videojuegos:
@@ -166,16 +148,12 @@ public class Main {
         return stockVideojuegos;
     }
 
-    /*
-    Precio ordenado por precio
-     */
     public static String[][] mostrarOrdenPorPrecio(String[][] videojuegos) {
         System.out.println("""
                 Stock de videojuegos:
                 +--------+---------------------+--------+
                 | Código | Nombre              | Precio |
                 +--------+---------------------+--------+""");
-
         String[][] precioVideojuegos = videojuegos;
         for (int i = 0; i < precioVideojuegos.length - 1; i++) {
             for (int j = i + 1; j < precioVideojuegos.length; j++) {
@@ -194,9 +172,6 @@ public class Main {
         return precioVideojuegos;
     }
 
-    /*
-    Registrar las ventas
-     */
     public static void registrarVentas(Scanner teclado, String[][] videojuegos) {
         boolean[] codigosValidos = new boolean[CODIGO_MAX_VIDEOJUEGO];
 
@@ -270,18 +245,10 @@ public class Main {
         return -1;
     }
 
-
-    /*
-    Registrar la devolucion de una venta
-     */
-
     public static void registrarDevolucion() {
 
     }
 
-    /*
-    Salida por pantalla
-     */
     public static void mostrarTodo() {
         int opcion;
         do {
@@ -290,9 +257,6 @@ public class Main {
         } while (opcion != 7);
     }
 
-    /*
-    Fin de programa
-     */
     public static void finPrograma() {
         System.out.println("Chao Chao Chao Chao!");
 

@@ -24,6 +24,7 @@ public class Main {
     }
 
     public static int mostrarMenu() {
+
         catalogoVideoJuegos();
         int opcion;
         do {
@@ -59,7 +60,7 @@ public class Main {
                 mostrarOrdenPorPrecio(videojuegos);
             }
             case 5 -> {
-                registrarVentas(teclado,videojuegos);
+                registrarVentas(teclado, videojuegos);
             }
             case 7 -> {
                 finPrograma();
@@ -158,7 +159,7 @@ public class Main {
             }
         }
         for (String[] videojuego : videojuegos) {
-            System.out.printf("| \t  %2s | %19s |\t%2s |", videojuego[0], videojuego[1], videojuego[3]);
+            System.out.printf("| \t  %2s | %19s |  %5s |", videojuego[0], videojuego[1], videojuego[3]);
             System.out.println();
         }
         System.out.println("+--------+---------------------+-------+");
@@ -198,22 +199,27 @@ public class Main {
     Registrar las ventas
      */
     public static void registrarVentas(Scanner teclado, String[][] videojuegos) {
-        boolean[] codigosValido = new boolean[CODIGO_MAX_VIDEOJUEGO];
+        boolean[] codigosValidos = new boolean[CODIGO_MAX_VIDEOJUEGO]; // Array para marcar códigos válidos
+
         int codigoVideojuego;
         boolean codigoValido = false;
         do {
             System.out.print("Introduzca el código del videojuego que desea comprar: ");
             codigoVideojuego = teclado.nextInt();
+
             for (String[] codigo : videojuegos) {
                 if (codigoVideojuego == Integer.parseInt(codigo[0])) {
                     codigoValido = true;
+                    codigosValidos[codigoVideojuego - 1] = true; // Marca el código como válido
                     break;
                 }
             }
+
             if (!codigoValido) {
-                System.out.println("Código incorrecto. Intentalo de nuevo.");
+                System.out.println("Código incorrecto. Inténtalo de nuevo.");
                 return;
             }
+
         } while (!codigoValido);
         System.out.print("Introduzca la cantidad de unidades que desea comprar: ");
         int cantidad = teclado.nextInt();
@@ -231,24 +237,21 @@ public class Main {
             ventas[codigoVenta - 1][2] = cantidad;
             realizarMasCompras();
             cabezeraResumenVenta();
-
-            for (int i = 0; i < codigosValido.length; i++) {
-                if (codigosValido[i]){
+            for (int i = 0; i < codigosValidos.length; i++) {
+                if (codigosValidos[i]) {
                     System.out.printf("| \t  %2s | %19s |\t   %2s |", videojuegos[i][0], videojuegos[i][1], videojuegos[i][3]);
                     System.out.println();
                 }
             }
-
             System.out.println("+--------+---------------------+----------+");
         }
-
     }
     public static void realizarMasCompras() {
         System.out.print("¿Desea comprar algún videojuego más? (S/N): ");
         String siONo = teclado.next();
-        if (siONo.equals("S")) {
+        if (siONo.equals("S") || siONo.equals("s")) {
             registrarVentas(teclado,videojuegos);
-        } else if (siONo.equals("N")){
+        } else if (siONo.equals("N") || siONo.equals("n")){
             System.out.println();
         }
     }
@@ -267,9 +270,11 @@ public class Main {
         return -1;
     }
 
+
     /*
     Registrar la devolucion de una venta
      */
+
     public static void registrarDevolucion() {
 
     }
@@ -295,19 +300,21 @@ public class Main {
     }
 
     public static int obtenerOpcion() {
+        System.out.println();
         do {
             System.out.print("Introduce opción: ");
             while (!teclado.hasNextInt()) {
-                System.out.println("Pero tu eres tonto?\n");
+                System.out.println("Pero tu eres tonto? aprende a poner números");
                 teclado.next();
                 System.out.print("Introduce opción: ");
             }
             int num = teclado.nextInt();
-            if (num < 1 || num > 7) {
-                System.out.println("Ánimo que tu puedes\n");
+            if (num < 0 || num > 7) {
+                System.out.println("Estas a NADA, para que te den una subvención por retraso, venga que tu puedes");
             } else {
                 return num;
             }
         } while (true);
     }
 }
+

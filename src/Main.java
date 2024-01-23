@@ -19,12 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
         teclado = new Scanner(System.in);
+        catalogoVideoJuegos();
         mostrarTodo();
     }
 
     public static int mostrarMenu() {
-
-        catalogoVideoJuegos();
         int opcion;
         do {
             System.out.println("""
@@ -280,4 +279,3 @@ public class Main {
         } while (true);
     }
 }
-

@@ -20,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
         teclado = new Scanner(System.in);
         catalogoVideoJuegos();
+
         mostrarTodo();
     }
 
@@ -43,6 +44,7 @@ public class Main {
     }
 
     public static void seleccion(int opcion) {
+        catalogoVideoJuegos();
         switch (opcion) {
             case 1 -> {
                 mostrarCatalogo();
@@ -51,7 +53,7 @@ public class Main {
                 mostrarStock(videojuegos);
             }
             case 3 -> {
-                mostrarOrdenPorStock(mostrarStock(videojuegos));
+                mostrarOrdenPorStock(videojuegos);
             }
             case 4 -> {
                 mostrarOrdenPorPrecio(videojuegos);
@@ -86,7 +88,7 @@ public class Main {
 
         }
     }
-    public static void mostrarCatalogo() {
+    public static String mostrarCatalogo() {
         System.out.println("""
                 Catálogo de videojuegos:
                 +--------+---------------------+--------+
@@ -97,6 +99,7 @@ public class Main {
             System.out.println();
         }
         System.out.println("+--------+---------------------+-------+");
+        return null;
     }
     public static String[][] mostrarStock(String[][] videojuegos) {
         System.out.println("""
@@ -194,21 +197,28 @@ public class Main {
             }
 
         } while (!codigoValido);
+
+        int stockDisponible = Integer.parseInt(videojuegos[codigoVideojuego - 1][3]);
+
         System.out.print("Introduzca la cantidad de unidades que desea comprar: ");
         int cantidad = teclado.nextInt();
 
-        int stockDisponible = Integer.parseInt(videojuegos[codigoVideojuego - 1][3]);
         if (cantidad > stockDisponible) {
             System.out.println("No hay stock suficiente.");
             realizarMasCompras();
         } else {
             int nuevoStock = stockDisponible - cantidad;
-            videojuegos[codigoVideojuego -1][3] = String.valueOf(nuevoStock);
+            videojuegos[codigoVideojuego - 1][3] = String.valueOf(nuevoStock);
+
+            String nombreVideojuego = videojuegos[codigoVideojuego - 1][1];
+
             int codigoVenta = codigoVentaDisponible();
             ventas[codigoVenta - 1][0] = codigoVenta;
             ventas[codigoVenta - 1][1] = codigoVideojuego;
             ventas[codigoVenta - 1][2] = cantidad;
+
             realizarMasCompras();
+
             cabezeraResumenVenta();
 
             for (int i = 0; i < codigosValidos.length; i++) {
@@ -219,6 +229,7 @@ public class Main {
             System.out.println("+--------+---------------------+----------+");
         }
     }
+
 
     public static void realizarMasCompras() {
         System.out.print("¿Desea comprar algún videojuego más? (S/N): ");
@@ -279,3 +290,11 @@ public class Main {
         } while (true);
     }
 }
+/*
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Sergi1997-byte/prueba.git
+git push -u origin main
+ */
